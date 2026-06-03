@@ -1,0 +1,72 @@
+{
+  "name": "@evolution-sdk/devtools-mcp",
+  "version": "0.1.0",
+  "description": "MCP server that gives AI coding agents token-efficient Evolution SDK repository context",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "evolution-devtools-mcp": "./dist/bin.js"
+  },
+  "sideEffects": [],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "manifest.json",
+    "src/**/*.ts",
+    "dist/**/*.js",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.ts.map"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json",
+    "start": "tsx src/bin.ts",
+    "dev": "tsx --watch src/bin.ts",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,mjs}\" \"test/**/*.{ts,mjs}\"",
+    "test": "vitest run",
+    "mcpb:stage": "rm -rf .mcpb-build && mkdir -p .mcpb-build/server && cp manifest.json .mcpb-build/manifest.json && esbuild src/bin.ts --bundle --platform=node --format=esm --outfile=.mcpb-build/server/bin.js",
+    "mcpb:validate": "mcpb validate manifest.json",
+    "mcpb:pack": "pnpm build && pnpm mcpb:stage && mcpb validate .mcpb-build/manifest.json && mcpb pack .mcpb-build dist/evolution-devtools-mcp.mcpb",
+    "clean": "rm -rf dist .mcpb-build .turbo .tsbuildinfo"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^2.1.2",
+    "esbuild": "^0.28.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.4"
+  },
+  "keywords": [
+    "cardano",
+    "evolution-sdk",
+    "mcp",
+    "ai-agents",
+    "developer-tools"
+  ],
+  "homepage": "https://github.com/IntersectMBO/evolution-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IntersectMBO/evolution-sdk.git",
+    "directory": "packages/devtools-mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/IntersectMBO/evolution-sdk/issues"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./dist/index.js"
+    }
+  }
+}

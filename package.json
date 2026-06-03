@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Evolution SDK - A Cardano blockchain development toolkit",
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",

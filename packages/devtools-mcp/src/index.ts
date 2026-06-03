@@ -1,0 +1,5 @@
+export { buildKnowledgeIndex } from "./indexer.js"
+export { readFileSlice, resolveRepoRoot, resolveSafePath } from "./repo.js"
+export { findEntry, searchKnowledge } from "./search.js"
+export { createEvolutionDevtoolsMcpServer } from "./server.js"
+export type { EntryKind, FileSlice, KnowledgeEntry, KnowledgeIndex, PackageSummary, WorkflowGuide } from "./types.js"
